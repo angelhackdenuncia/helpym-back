@@ -5,6 +5,7 @@
  */
 package com.helpym.services;
 
+import com.helpym.dao.DenunciaDao;
 import com.helpym.entities.Denuncia;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
@@ -38,6 +39,8 @@ public class DenunciaService {
         
         Denuncia denuncia= new Denuncia();
         in.setDescripcion("test");
+        DenunciaDao dao= new DenunciaDao();
+        dao.insertDenuncia(denuncia);        
         return Response.ok().entity(in).build();
     }
      
@@ -58,6 +61,8 @@ public class DenunciaService {
     public Denuncia getDenuncia(){
         Denuncia test= new Denuncia();
         test.setDescripcion("Prueba");
+        test.setLatitud(1);
+        test.setLongitud(2);
         return test;
     }
     
