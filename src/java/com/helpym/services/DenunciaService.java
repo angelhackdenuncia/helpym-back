@@ -29,7 +29,7 @@ public class DenunciaService {
     public DenunciaService() {
     }
         
-    @RolesAllowed("ALL")
+
     @Path("put")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
@@ -41,7 +41,7 @@ public class DenunciaService {
         return Response.ok().entity(in).build();
     }
      
-    @RolesAllowed("ALL")
+
     @Path("post")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
