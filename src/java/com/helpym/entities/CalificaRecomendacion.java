@@ -17,21 +17,14 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Recomendacion {
+public class CalificaRecomendacion {
  
-    @XmlElement
-    String recomendacion;
 
     @XmlElement
     Integer idRecomendacion;
     
-    public String getRecomendacion() {
-        return recomendacion;
-    }
-
-    public void setRecomendacion(String recomendacion) {
-        this.recomendacion = recomendacion;
-    }
+    @XmlElement
+    Integer calificacion;
 
     public Integer getIdRecomendacion() {
         return idRecomendacion;
@@ -39,6 +32,14 @@ public class Recomendacion {
 
     public void setIdRecomendacion(Integer idRecomendacion) {
         this.idRecomendacion = idRecomendacion;
+    }
+
+    public Integer getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(Integer calificacion) {
+        this.calificacion = calificacion;
     }
     
     
