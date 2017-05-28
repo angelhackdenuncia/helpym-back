@@ -35,8 +35,7 @@ public class DenunciaDao {
         try {
             
             
-            DataSource ds = DatasourseResolver.getDataSource();            
-            System.out.println("Datasource" + ds);            
+            DataSource ds = DatasourseResolver.getDataSource();                                   
             conn = ds.getConnection();
             
 	    String query = "INSERT INTO helpym.Denuncias (Denuncia,Fecha_Denuncia, Latitud, Longitud, Direccion,Imagen) VALUES (?,?,?,?,?,?)";
@@ -75,6 +74,7 @@ public class DenunciaDao {
             // Store and return result of the query
             if (rs.next()) {
                 System.out.println("Id: "+rs.getInt(1));
+                denunciaId = rs.getInt(1);
             }
         } catch (SQLException e) {
                 System.err.println(e.getMessage());

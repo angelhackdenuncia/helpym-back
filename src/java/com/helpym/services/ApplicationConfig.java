@@ -23,6 +23,7 @@ public class ApplicationConfig extends Application {
     }
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(com.helpym.services.CalificaRecomendacionService.class);
         resources.add(com.helpym.services.DenunciaService.class);
 
     }

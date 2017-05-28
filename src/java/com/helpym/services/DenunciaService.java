@@ -5,21 +5,19 @@
  */
 package com.helpym.services;
 
-import com.helpym.ai.AiTest;
+import com.helpym.ai.AiQuery;
 import com.helpym.dao.DenunciaDao;
+import com.helpym.dao.RecomendacionDao;
 import com.helpym.entities.Denuncia;
-import javax.annotation.security.RolesAllowed;
+import com.helpym.entities.Recomendacion;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -38,17 +36,17 @@ public class DenunciaService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putDenuncia(Denuncia in){
         
+        Recomendacion recomendacionRespose = new Recomendacion();
         
-        in.setDescripcion("test");
+        AiQuery test= new AiQuery();
+        recomendacionRespose.setRecomendacion(test.getRecomendacion(in.getDescripcion()));                
+        DenunciaDao dao = new DenunciaDao();                                
+        int idDenuncia = dao.insertDenuncia(in);         
         
-        AiTest test= new AiTest();
-        test.recomendacion();
-        
-        DenunciaDao dao= new DenunciaDao();
-        dao.insertDenuncia(in); 
-
-                
-        return Response.ok().entity(in).build();
+        RecomendacionDao recDao= new RecomendacionDao();
+        int idRecomendacion=recDao.insertRecomendacionLogAI(idDenuncia, recomendacionRespose.getRecomendacion());                 
+        recomendacionRespose.setIdRecomendacion(idRecomendacion);        
+        return Response.ok().entity(recomendacionRespose).build();
     }
      
 
@@ -58,9 +56,7 @@ public class DenunciaService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postDenuncia(Denuncia in){
         
-        Denuncia denuncia= new Denuncia();
-        in.setDescripcion("test");
-        return Response.ok().entity(in).build();
+       return this.putDenuncia(in);
     }    
     
     @GET

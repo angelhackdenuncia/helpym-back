@@ -18,35 +18,22 @@ import org.glassfish.jersey.client.internal.LocalizationMessages;
  *
  * @author ecarrillo
  */
-public class AiTest {
+public class AiQuery {
    
-    public String recomendacion(){
-    
+    public String getRecomendacion(String descDenuncia){       
         try {
-            AIConfiguration configuration = new AIConfiguration("276ce3e6ab3f426785678f8376bbf0ab");
-            
-            AIDataService dataService = new AIDataService(configuration);
-            
-            String line="He visto un maltrato familiar en la calle 100 con 7ma";
-            
-            
-            
-            
-            AIRequest request = new AIRequest(line);
-            
-            AIResponse response = dataService.request(request);
-            
+            AIConfiguration configuration = new AIConfiguration("276ce3e6ab3f426785678f8376bbf0ab");            
+            AIDataService dataService = new AIDataService(configuration);                                                                       
+            AIRequest request = new AIRequest(descDenuncia);            
+            AIResponse response = dataService.request(request);            
             if (response.getStatus().getCode() == 200) {
                 System.out.println(response.getResult().getFulfillment().getSpeech());
                 return response.getResult().getFulfillment().getSpeech();
             } else {
                 System.err.println(response.getStatus().getErrorDetails());
             }
-            
-                     
-            System.out.println("See ya!");
         } catch (AIServiceException ex) {
-            Logger.getLogger(AiTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AiQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
