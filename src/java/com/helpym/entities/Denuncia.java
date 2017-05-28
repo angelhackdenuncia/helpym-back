@@ -45,7 +45,7 @@ public class Denuncia {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
@@ -53,9 +53,11 @@ public class Denuncia {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+
+    
 
     public String getImagen() {
         return imagen;

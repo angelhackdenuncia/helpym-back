@@ -64,8 +64,8 @@ public class DenunciaService {
     public Denuncia getDenuncia(){
         Denuncia test= new Denuncia();
         test.setDescripcion("Prueba");
-        test.setLatitud(1);
-        test.setLongitud(2);
+        test.setLatitud(1.0);
+        test.setLongitud(2.0);
         return test;
     }
     

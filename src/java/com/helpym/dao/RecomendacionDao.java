@@ -64,25 +64,20 @@ public class RecomendacionDao {
         
         boolean updateOK = false;
         Connection conn=null;
-        int idRecomendacion=0;
+
         try {
             
             
             DataSource ds = DatasourseResolver.getDataSource();                      
             conn = ds.getConnection();
             
-	    String query = "INSERT INTO helpym.Logs_Motor_AI (id_Denuncia, Respuesta_AI) VALUES (?, ?)";
+	    String query = "UPDATE helpym.Logs_Motor_AI SET Efectividad_Respuesta = ? WHERE id_Log_Motor_AI = ?";
             PreparedStatement pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            //pstm.setInt(1, IdDenuncia);
-            //pstm.setString(2,recomen);           
-            
+            pstm.setInt(1,calificacion.getCalificacion()); 
+            pstm.setInt(2, calificacion.getIdRecomendacion());                                 
             pstm.executeUpdate();
-            ResultSet rs= pstm.getGeneratedKeys();
-            // Store and return result of the query
-            if (rs.next()) {
-                System.out.println("Id Log Recomendaciones: "+rs.getInt(1));
-                idRecomendacion =rs.getInt(1);
-            }
+            updateOK=true;
+
         } catch (SQLException e) {
                 System.err.println(e.getMessage());
         } finally {
