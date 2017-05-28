@@ -5,6 +5,7 @@
  */
 package com.helpym.services;
 
+import com.helpym.ai.AiTest;
 import com.helpym.dao.DenunciaDao;
 import com.helpym.entities.Denuncia;
 import javax.annotation.security.RolesAllowed;
@@ -39,8 +40,14 @@ public class DenunciaService {
         
         Denuncia denuncia= new Denuncia();
         in.setDescripcion("test");
+        
+        AiTest test= new AiTest();
+        test.recomendacion();
+        
         DenunciaDao dao= new DenunciaDao();
-        dao.insertDenuncia(denuncia);        
+        dao.insertDenuncia(denuncia); 
+
+                
         return Response.ok().entity(in).build();
     }
      
