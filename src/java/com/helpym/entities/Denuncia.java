@@ -22,10 +22,16 @@ public class Denuncia {
     String descripcion;
     
     @XmlElement
-    double latitud;
+    Double latitud;
 
     @XmlElement
-    double longitud;
+    Double longitud;
+    
+    @XmlElement
+    String imagen;
+    
+    @XmlElement
+    String direccion;
     
     public String getDescripcion() {
         return descripcion;
@@ -35,7 +41,7 @@ public class Denuncia {
         this.descripcion = descripcion;
     }
 
-    public double getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
@@ -43,13 +49,28 @@ public class Denuncia {
         this.latitud = latitud;
     }
 
-    public double getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
     public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
-    
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }        
     
 }
