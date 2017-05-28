@@ -38,14 +38,14 @@ public class DenunciaService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response putDenuncia(Denuncia in){
         
-        Denuncia denuncia= new Denuncia();
+        
         in.setDescripcion("test");
         
         AiTest test= new AiTest();
         test.recomendacion();
         
         DenunciaDao dao= new DenunciaDao();
-        dao.insertDenuncia(denuncia); 
+        dao.insertDenuncia(in); 
 
                 
         return Response.ok().entity(in).build();

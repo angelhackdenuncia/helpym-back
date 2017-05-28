@@ -8,6 +8,8 @@ package com.helpym.dao;
 import com.helpym.entities.Denuncia;
 import com.helpym.util.DatasourseResolver;
 import java.sql.Connection;
+import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,10 +34,12 @@ public class DenunciaDao {
             System.out.println("Datasource" + ds);            
             conn = ds.getConnection();
             
-	    String query = "INSERT INTO 'helpym'.'Denuncias' ('Denuncia') VALUES ('?');";
+	    String query = "INSERT INTO helpym.Denuncias (Denuncia,Fecha_Denuncia) VALUES (?,?)";
             PreparedStatement pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, denuncia.getDescripcion());
-            ResultSet rs = pstm.executeQuery(query);
+            pstm.setDate(2,new Date(new java.util.Date().getTime()) );
+            pstm.executeUpdate();
+            ResultSet rs= pstm.getGeneratedKeys();
             // Store and return result of the query
             if (rs.next()) {
                 System.out.println("Id: "+rs.getInt(1));
