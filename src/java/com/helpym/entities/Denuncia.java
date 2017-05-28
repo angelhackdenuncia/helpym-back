@@ -33,6 +33,12 @@ public class Denuncia {
     @XmlElement
     String direccion;
     
+    @XmlElement
+    String tipDenuncia;
+    
+    @XmlElement
+    String tipDAgresion;    
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -55,9 +61,7 @@ public class Denuncia {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
-    }
-
-    
+    }    
 
     public String getImagen() {
         return imagen;
@@ -73,6 +77,22 @@ public class Denuncia {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }        
-    
+    }
+
+    public String getTipDenuncia() {
+        return tipDenuncia;
+    }
+
+    public void setTipDenuncia(String tipDenuncia) {
+        this.tipDenuncia = tipDenuncia;
+    }
+
+    public String getTipDAgresion() {
+        return tipDAgresion;
+    }
+
+    public void setTipDAgresion(String tipDAgresion) {
+        this.tipDAgresion = tipDAgresion;
+    }
+ 
 }

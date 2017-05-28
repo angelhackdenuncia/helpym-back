@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.Types;
 
 import java.util.logging.Level;
@@ -38,10 +39,10 @@ public class DenunciaDao {
             DataSource ds = DatasourseResolver.getDataSource();                                   
             conn = ds.getConnection();
             
-	    String query = "INSERT INTO helpym.Denuncias (Denuncia,Fecha_Denuncia, Latitud, Longitud, Direccion,Imagen) VALUES (?,?,?,?,?,?)";
+	    String query = "INSERT INTO helpym.Denuncias (Denuncia,Fecha_Denuncia, Latitud, Longitud, Direccion,Imagen,Tipo_denuncia,Tipo_Agresion) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement pstm = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, denuncia.getDescripcion());
-            pstm.setDate(2,new Date(new java.util.Date().getTime()) );
+            pstm.setTimestamp(2,new Timestamp(new java.util.Date().getTime()) );
             
             if(denuncia.getLatitud()!=null){
                 pstm.setDouble(3, denuncia.getLatitud());
@@ -68,6 +69,19 @@ public class DenunciaDao {
             }else{
                 pstm.setNull(6,Types.BLOB);
             }             
+            
+            
+            if(denuncia.getTipDenuncia()!=null){
+                pstm.setString(7, denuncia.getTipDenuncia());
+            }else{
+                pstm.setString(7,"N/D");
+            }  
+
+            if(denuncia.getTipDAgresion()!=null){
+                pstm.setString(8, denuncia.getTipDAgresion());
+            }else{
+                pstm.setString(8,"N/D");
+            }              
             
             pstm.executeUpdate();
             ResultSet rs= pstm.getGeneratedKeys();

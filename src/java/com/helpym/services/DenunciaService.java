@@ -5,6 +5,7 @@
  */
 package com.helpym.services;
 
+import ai.api.model.AIResponse;
 import com.helpym.ai.AiQuery;
 import com.helpym.dao.DenunciaDao;
 import com.helpym.dao.RecomendacionDao;
@@ -39,8 +40,16 @@ public class DenunciaService {
         Recomendacion recomendacionRespose = new Recomendacion();
         
         AiQuery test= new AiQuery();
-        recomendacionRespose.setRecomendacion(test.getRecomendacion(in.getDescripcion()));                
-        DenunciaDao dao = new DenunciaDao();                                
+        AIResponse respuesta = test.getRecomendacion(in.getDescripcion());
+        recomendacionRespose.setRecomendacion(respuesta.getResult().getFulfillment().getSpeech());                
+        DenunciaDao dao = new DenunciaDao();
+        
+        in.setTipDenuncia(respuesta.getResult().getMetadata().getIntentName());
+        if (respuesta.getResult().getParameters().get("tipo_agresion")!=null){
+            in.setTipDAgresion(respuesta.getResult().getParameters().get("tipo_agresion").getAsString());
+        }
+        
+        
         int idDenuncia = dao.insertDenuncia(in);         
         
         RecomendacionDao recDao= new RecomendacionDao();

@@ -20,7 +20,7 @@ import org.glassfish.jersey.client.internal.LocalizationMessages;
  */
 public class AiQuery {
    
-    public String getRecomendacion(String descDenuncia){       
+    public AIResponse getRecomendacion(String descDenuncia){       
         try {
             AIConfiguration configuration = new AIConfiguration("276ce3e6ab3f426785678f8376bbf0ab");            
             AIDataService dataService = new AIDataService(configuration);                                                                       
@@ -28,7 +28,7 @@ public class AiQuery {
             AIResponse response = dataService.request(request);            
             if (response.getStatus().getCode() == 200) {
                 System.out.println(response.getResult().getFulfillment().getSpeech());
-                return response.getResult().getFulfillment().getSpeech();
+                return response;
             } else {
                 System.err.println(response.getStatus().getErrorDetails());
             }
